@@ -1,14 +1,21 @@
-import React from "react";
-import { FindPage } from "../FindPage/FindPage";
+import React from 'react';
+import { ProfileStyles, ButtonStyles } from '../../styles';
 
-//need an componentDidMount function
-function ProfilePage(props) {
+const ProfilePage = props => {
+  const { data } = props;
   return (
-    <div>
-      Profile Page
-      <p>{FindPage.state.dataResponse}</p>
-    </div>
+    <ProfileStyles>
+      <h2>Profile Page</h2>
+      <div className='Flex-Content'>
+        <img src={data.avatar_url} alt={data.name} />
+        <p className='UserName'>{data.name}</p>
+      </div>
+      <p>{data.company}</p>
+      <ButtonStyles className='Button' onClick={props.toggleFind}>
+        Search Again
+      </ButtonStyles>
+    </ProfileStyles>
   );
-}
+};
 
 export default ProfilePage;
