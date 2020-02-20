@@ -1,59 +1,63 @@
-import React from "react";
-import "./App.css";
+import React, { useState } from "react";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
-import { FindPage } from "./components/FindPage/FindPage";
+import FindPage from "./components/FindPage/FindPage";
+import LoadingScreen from "./components/LoadingScreen/LoadingScreen.jsx";
+import "../src/App.css";
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      displayFind: true,
-      dataResponse: {}
-    };
-  }
+const App = () => {
+  const [displayFind, setDisplayFind] = useState(true);
+  const [loadingScreen, setLoadingScreen] = useState(false);
+  const [input, setInput] = useState("");
+  const [data, setData] = useState({});
 
-  handleFind(event, input) {
-    if (event.key === "Enter") {
-      const searchURL = `https://api.github.com/users/${input}`;
-      fetch(searchURL)
-        .then(response => {
-          if (response.status !== 200) {
-            this.setState({
-              value: "Profile Doesnt Exist"
-            });
-            return;
-          } else {
-            response.json().then(data => {
-              this.setState({
-                dataResponse: data
-              });
-            });
-          }
-        })
-        .catch(() => {
-          return;
-        });
-      setTimeout(() => {
-        console.log(this.state.dataResponse);
-      }, 2000);
+  const toggleFind = () => {
+    setDisplayFind(!displayFind);
+    setInput("");
+  };
 
-      this.setState({
-        displayFind: !this.state.displayFind
-      });
+  const handleFind = async () => {
+    setLoadingScreen(true);
+    const searchURL = `https://api.github.com/users/${input}`;
+    const request = await fetch(searchURL);
+    if (request.status !== 200) {
+      setInput("Profile Doesn't Exist");
+      return;
     }
-  }
+    const response = await request.json();
 
-  render() {
-    return (
-      <div>
-        {this.state.displayFind ? (
-          <FindPage keyPressed={this.handleFind} />
-        ) : (
-          <ProfilePage />
-        )}
-      </div>
-    );
-  }
-}
+    if (response) {
+      setData(response);
+      setDisplayFind(false);
+      console.log(response);
+    }
+  };
+
+  const handleChange = value => {
+    setInput(value);
+  };
+
+  const onFocus = () => {
+    setInput("");
+  };
+
+  return (
+    <div>
+      {displayFind ? (
+        <FindPage
+          value={input}
+          keyPressed={handleFind}
+          handleChange={handleChange}
+          onFocus={onFocus}
+        />
+      ) : (
+        <ProfilePage
+          data={data}
+          loadingScreen={loadingScreen}
+          toggleFind={toggleFind}
+        />
+      )}
+    </div>
+  );
+};
 
 export default App;
