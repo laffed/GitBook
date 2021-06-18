@@ -1,10 +1,8 @@
 import React from "react";
 import atom from "../img/atom.png";
-import "../FindPage/styles.css";
+import "./styles.css";
 
-const FindPage = props => {
-  //
-  //
+function FindPage(props) {
 
   const inputChange = e => {
     props.handleChange(e.target.value);

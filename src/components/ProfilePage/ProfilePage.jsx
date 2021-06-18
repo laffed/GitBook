@@ -2,7 +2,7 @@ import React from "react";
 import "../ProfilePage/styles.css";
 import calendar from "../img/white-calendar-icon-png-4-transparent.png";
 
-const ProfilePage = props => {
+function ProfilePage(props) {
   if (props.data.length === 0) {
     return <div>loading...</div>;
   }
@@ -26,12 +26,13 @@ const ProfilePage = props => {
       <main id="indexMain">
         <div className="profile-head">
           <div className="head-top">
-            <img
-              id="prof-img"
-              src={props.data.avatar_url}
-              alt="Avatar"
-              className="profile-img"
-            />
+            <div className="img-container">
+              <img
+                src={props.data.avatar_url}
+                alt="Avatar"
+                className="profile-img"
+              />
+            </div>
             <h2 id="userActual">{props.data.name}</h2>
             <a
               id="userHandle"
@@ -49,19 +50,19 @@ const ProfilePage = props => {
               </p>
             </div>
             <div className="profile-stats">
-              <div className="repos">
+              <div className="box">
                 <p id="repos" className="stats-integer">
                   {props.data.public_repos}
                 </p>
                 <p className="stats-words">REPOS</p>
               </div>
-              <div className="followers">
+              <div className="box">
                 <p id="followers" className="stats-integer">
                   {props.data.followers}
                 </p>
                 <p className="stats-words">FOLLOWERS</p>
               </div>
-              <div className="following">
+              <div className="box">
                 <p id="following" className="stats-integer">
                   {props.data.following}
                 </p>

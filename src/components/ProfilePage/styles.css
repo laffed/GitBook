@@ -43,12 +43,17 @@ nav button:focus {
   align-items: center;
 }
 
-.profile-img {
+.img-container {
   width: 400px;
-  height: auto;
+  height: 400px;
+  object-fit: contain;
   border-radius: 50%;
-  border: 5px solid #713e33;
-  margin-bottom: 20px;
+  border: 3px solid #F9B64C;
+}
+.profile-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
 
 .head-top h2 {
@@ -62,6 +67,13 @@ nav button:focus {
   max-width: 700px;
   font-size: large;
   font-weight: 700;
+}
+
+#userActual {
+  margin: 1rem 0 0;
+}
+
+#userHandle {
 }
 
 .head-top a {
@@ -81,13 +93,16 @@ nav button:focus {
 .joined-date {
   font-weight: 700;
   font-size: x-large;
-  margin-bottom: 20px;
   padding: auto;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+#dateJoined {
+  margin: 0;
 }
 
 .joined-date img {
@@ -104,16 +119,14 @@ nav button:focus {
   margin-top: 20px;
 }
 
-.repos,
-.followers,
-.following {
+.box {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: auto 15px auto 15px;
   padding: auto;
-  width: 30%;
+  width: 150px;
   min-width: 100px;
   background-color: #0881b5;
   border-radius: 5%;

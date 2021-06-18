@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import FindPage from "./components/FindPage/FindPage";
-import LoadingScreen from "./components/LoadingScreen/LoadingScreen.jsx";
-import "../src/App.css";
+import "./App.css";
 
-const App = () => {
+function App() {
   const [displayFind, setDisplayFind] = useState(true);
   const [loadingScreen, setLoadingScreen] = useState(false);
   const [input, setInput] = useState("");
@@ -28,7 +27,6 @@ const App = () => {
     if (response) {
       setData(response);
       setDisplayFind(false);
-      console.log(response);
     }
   };
 
