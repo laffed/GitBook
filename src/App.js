@@ -22,11 +22,23 @@ function App() {
       setInput("Profile Doesn't Exist");
       return;
     }
-    const response = await request.json();
+    const res = await request.json();
 
-    if (response) {
-      setData(response);
+    if (res) {
+      const newData = {
+        avatar_url: res.avatar_url,
+        name: res.name,
+        html_url: res.html_url,
+        login: res.login,
+        bio: res.bio,
+        create_at: res.create_at,
+        public_repos: res.public_repos,
+        followers: res.followers,
+        following: res.following
+      }
+      setData(newData);
       setDisplayFind(false);
+      console.log(res);
     }
   };
 
